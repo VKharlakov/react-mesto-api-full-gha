@@ -32,7 +32,7 @@ router.use(auth);
 router.use('/users', require('./users'));
 router.use('/cards', require('./cards'));
 
-router.use('*', (next) => {
+router.use('*', (req, res, next) => {
   next(new NotFound('Такой страницы не существует'));
 });
 
