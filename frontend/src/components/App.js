@@ -35,30 +35,35 @@ function App() {
   const navigate = useNavigate()                                //Хук навигации
 
   React.useEffect(() => {
+    loggedIn &&
+      api.getUserInfo()
+        .then((userData) => {
+          setCurrentUser(userData)
+        })
+        .catch((err) => console.log(err))
+
+    loggedIn &&
+      api.getInitialCardSet()
+        .then((cardList) => {
+          console.log('getting cards api')
+          setCards(cardList)
+          cards.map((card) => ({
+            name: card.name,
+            link: card.link,
+            likes: card.likes,
+            _id: card._id,
+            owner: card.owner
+          }))
+        })
+        .catch((err) => console.log(err))
+  }, [loggedIn])
+
+  React.useEffect(() => {
     //Проверка наличия токена в localStorage
     tokenCheck()
 
-    //Метод получения данных о пользователе с api
-    api.getUserInfo()
-      .then((userData) => {
-        setCurrentUser(userData)
-      })
-      .catch((err) => console.log(err))
-
     //Метод получения массива фотографий с api
-    api.getInitialCardSet()
-      .then((cardList) => {
-        console.log('getting cards api')
-        setCards(cardList)
-        cards.map((card) => ({
-          name: card.name,
-          link: card.link,
-          likes: card.likes,
-          _id: card._id,
-          owner: card.owner
-        }))
-      })
-      .catch((err) => console.log(err))
+
   }, [])
 
   //Объявление функции проверки наличия токена в localStorage
@@ -179,7 +184,7 @@ function App() {
   //Объявление функции выхода из учетной записи
   function handleLogOut() {
     localStorage.removeItem('jwt')
-    setUserData({email: '', password: ''})
+    setUserData({ email: '', password: '' })
     navigate('/signin', { replace: true })
     setLoggedIn(false)
   }
@@ -199,7 +204,7 @@ function App() {
             cards={cards} />} />
           <Route path='/signin' element={<Login onLogin={handleAuthorize} isRegisterSuccessful={isRegisterSuccessful} userData={userData} />} />
           <Route path='/signup' element={<Register onRegister={handleRegister} />} />
-          <Route path='*' element={<Navigate to='/'/>} />
+          <Route path='*' element={<Navigate to='/' />} />
         </Routes>
 
         {loggedIn && <Footer />}
