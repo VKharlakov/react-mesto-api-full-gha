@@ -9,7 +9,7 @@ function InfoToolTip({ isOpen, isRegisterSuccessful, onClose }, props) {
 
         //Если регистрация прошла успешно, пользователя переадрисуют на Login
         if (isRegisterSuccessful) {
-            navigate('/sign-in', { replace: true })
+            navigate('/signin', { replace: true })
         }
 
     }

@@ -6,13 +6,13 @@ function Header({ loggedIn, userData, onLogOut }) {
     const currentPath = useLocation()
 
     const nonAuthorizedElements = () => {
-        if (currentPath.pathname === '/sign-in') {
+        if (currentPath.pathname === '/signin') {
             return (
-                <Link className="header__link" to={'/sign-up'}>Зарегистрироваться</Link>
+                <Link className="header__link" to={'/signup'}>Зарегистрироваться</Link>
             )
         } else {
             return (
-                <Link className="header__link" to={'/sign-in'}>Войти</Link>
+                <Link className="header__link" to={'/signin'}>Войти</Link>
             )
         }
     }
