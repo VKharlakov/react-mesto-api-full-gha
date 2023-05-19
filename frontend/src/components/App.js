@@ -41,9 +41,7 @@ function App() {
     //Метод получения данных о пользователе с api
     api.getUserInfo()
       .then((userData) => {
-        console.log('userData', userData)
         setCurrentUser(userData)
-        console.log(currentUser)
       })
       .catch((err) => console.log(err))
 
