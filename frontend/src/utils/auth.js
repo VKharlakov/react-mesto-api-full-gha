@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://mesto.students.vkharlakov.nomoredomains.monster/api'
+export const BASE_URL = 'https://api.mesto.vkharlakod.nomoredomains.monster'
 
 function returnResponse(res) {
     if (res.ok) {

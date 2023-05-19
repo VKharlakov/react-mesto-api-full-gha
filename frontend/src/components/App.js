@@ -1,6 +1,6 @@
 import '../App.css';
 import React from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRouteElement from './ProtectedRoute';
 
@@ -189,7 +189,7 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Header loggedIn={loggedIn} userData={userData} onLogOut={handleLogOut} />
         <Routes>
-          <Route path='*' element={<ProtectedRouteElement element={Main} loggedIn={loggedIn}
+          <Route path='/' element={<ProtectedRouteElement element={Main} loggedIn={loggedIn}
             onEditProfile={setIsEditProfilePopupOpen}
             onAddPlace={setIsAddPlacePopupOpen}
             onEditAvatar={setIsEditAvatarPopupOpen}
@@ -199,6 +199,7 @@ function App() {
             cards={cards} />} />
           <Route path='/signin' element={<Login onLogin={handleAuthorize} isRegisterSuccessful={isRegisterSuccessful} userData={userData} />} />
           <Route path='/signup' element={<Register onRegister={handleRegister} />} />
+          <Route path='*' element={<Navigate to='/'/>} />
         </Routes>
 
         {loggedIn && <Footer />}

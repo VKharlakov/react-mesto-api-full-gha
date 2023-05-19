@@ -1,9 +1,11 @@
 const allowedCors = [
+  'localhost:3000',
   'https://praktikum.tk',
   'http://praktikum.tk',
-  'localhost:3000',
   'https://mesto.students.vkharlakov.nomoredomains.monster',
   'http://mesto.students.vkharlakov.nomoredomains.monster',
+  'https://api.mesto.vkharlakod.nomoredomains.monster',
+  'http://api.mesto.vkharlakod.nomoredomains.monster',
 ];
 
 module.exports = (req, res, next) => {
