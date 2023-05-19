@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://api.mesto.vkharlakod.nomoredomains.monster'
+export const BASE_URL = 
+process.env.NODE_ENV === 'production' ? 'https://api.mesto.vkharlakod.nomoredomains.monster' : 'http://localhost:3000'
 
 function returnResponse(res) {
     if (res.ok) {

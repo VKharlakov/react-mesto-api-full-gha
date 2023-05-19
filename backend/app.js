@@ -2,24 +2,24 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 const config = require('./config');
-// const cors = require('./middlewares/cors');
 
 const app = express();
-mongoose.connect(config.MONGODB_URI)
+mongoose.connect('mongodb://127.0.0.1/mestodb')
   .then(() => console.log('Успешное подключение к MongoDB'))
   .catch((err) => console.error('Ошибка подключения:', err));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);
-app.use(cors());
+app.use(cors);
 app.use(router);
 app.use(errorLogger);
 app.use(errors());
