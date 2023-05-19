@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -16,7 +15,6 @@ mongoose.connect(config.MONGODB_URI)
   .then(() => console.log('Успешное подключение к MongoDB'))
   .catch((err) => console.error('Ошибка подключения:', err));
 
-app.use(helmet());
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);
