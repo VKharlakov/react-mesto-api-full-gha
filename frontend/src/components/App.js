@@ -182,7 +182,7 @@ function App() {
   function handleLogOut() {
     localStorage.removeItem('token')
     setUserData({email: '', password: ''})
-    navigate('/sign-in', { replace: true })
+    navigate('/signin', { replace: true })
     setLoggedIn(false)
   }
 
@@ -199,8 +199,8 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             cards={cards} />} />
-          <Route path='/sign-in' element={<Login onLogin={handleAuthorize} isRegisterSuccessful={isRegisterSuccessful} userData={userData} />} />
-          <Route path='/sign-up' element={<Register onRegister={handleRegister} />} />
+          <Route path='/signin' element={<Login onLogin={handleAuthorize} isRegisterSuccessful={isRegisterSuccessful} userData={userData} />} />
+          <Route path='/signup' element={<Register onRegister={handleRegister} />} />
         </Routes>
 
         {loggedIn && <Footer />}

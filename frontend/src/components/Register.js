@@ -26,7 +26,7 @@ function Register({ onRegister }) {
             <input name="email" value={formValue.email} onChange={handleChange} placeholder="Email" className="auth-form__input" />
             <input name="password" value={formValue.password} onChange={handleChange} placeholder="Пароль" className="auth-form__input" />
             <button className="auth-form__button">Зарегистрироваться</button>
-            <Link to={'/sign-in'} className="auth-form__link">Уже зарегистрированы? Войти</Link>
+            <Link to={'/signin'} className="auth-form__link">Уже зарегистрированы? Войти</Link>
         </form>
     )
 }
