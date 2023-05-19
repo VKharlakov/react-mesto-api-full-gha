@@ -19,7 +19,7 @@ mongoose.connect(config.MONGODB_URI)
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);
-app.use(cors)();
+app.use(cors());
 app.use(router);
 app.use(errorLogger);
 app.use(errors());
