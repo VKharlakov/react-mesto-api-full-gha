@@ -65,8 +65,8 @@ function App() {
 
   //Объявление функции проверки наличия токена в localStorage
   function tokenCheck() {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token')
+    if (localStorage.getItem('jwt')) {
+      const token = localStorage.getItem('jwt')
 
       if (token) {
         auth.checkToken(token)
@@ -180,7 +180,7 @@ function App() {
 
   //Объявление функции выхода из учетной записи
   function handleLogOut() {
-    localStorage.removeItem('token')
+    localStorage.removeItem('jwt')
     setUserData({email: '', password: ''})
     navigate('/signin', { replace: true })
     setLoggedIn(false)
