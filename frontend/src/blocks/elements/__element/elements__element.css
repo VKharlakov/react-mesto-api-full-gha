@@ -1,0 +1,13 @@
+.elements__element {
+	border-radius: 10px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: .4s ease-out;
+	position: relative;
+}
+
+.elements__element:hover {
+	cursor: pointer;
+	transform: scale(1.04);
+}

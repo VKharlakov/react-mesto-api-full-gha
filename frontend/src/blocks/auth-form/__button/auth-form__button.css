@@ -1,0 +1,18 @@
+.auth-form__button {
+    height: 50px;
+    width: 100%;
+    max-width: 358px;
+    background-color: #fff;
+    border-radius: 2px;
+    color: #000;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    transition: .2s ease-out;
+}
+
+.auth-form__button:hover {
+    cursor: pointer;
+    opacity: .8;
+}

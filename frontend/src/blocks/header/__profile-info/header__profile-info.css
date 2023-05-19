@@ -1,0 +1,17 @@
+.header__profile-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+@media screen and (max-width: 930px) and (min-width: 319px) {
+	.header__profile-info {
+		padding-right: 27px;
+	}
+}
+
+@media screen and (max-width: 319px) {
+	.header__profile-info {
+		padding-right: 17px;
+	}
+}

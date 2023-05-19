@@ -1,0 +1,35 @@
+require('dotenv').config();
+
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const { errors } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const router = require('./routes');
+const config = require('./config');
+
+const app = express();
+mongoose.connect(config.MONGODB_URI)
+  .then(() => console.log('Успешное подключение к MongoDB'))
+  .catch((err) => console.error('Ошибка подключения:', err));
+
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(requestLogger);
+app.use(router);
+app.use(errorLogger);
+app.use(errors());
+app.use((err, req, res, next) => {
+  if (err.statusCode) {
+    res.status(err.statusCode).send({ message: err.message });
+  } else {
+    res.status(500).send({ message: 'Произошла ошибка на сервере' });
+  }
+
+  next();
+});
+
+app.listen(config.PORT, () => {
+  console.log(`App's listening on port ${config.PORT}`);
+});

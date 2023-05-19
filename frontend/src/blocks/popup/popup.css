@@ -1,0 +1,20 @@
+.popup {
+	z-index: 3;
+	display: grid;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, .5);
+	justify-content: center;
+	align-items: center;
+	grid-template-columns: 500px;
+	grid-template-rows: 32px 330px;
+	justify-items: center;
+	align-content: center;
+
+	visibility: hidden;
+	opacity: 0;
+	transition: all .2s ease-out;
+}

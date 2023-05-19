@@ -1,0 +1,12 @@
+.popup_opened {
+	display: grid;
+	visibility: visible;
+	opacity: 1;
+}
+
+@media screen and (max-width: 578px) {
+	.popup_opened {
+		grid-template-columns: 282px;
+		grid-template-rows: 20px 322px;
+	}
+}
