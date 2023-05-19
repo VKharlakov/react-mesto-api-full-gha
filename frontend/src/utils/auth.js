@@ -10,40 +10,39 @@ function returnResponse(res) {
 
 export const register = (email, password) => {
     return fetch(`${BASE_URL}/signup`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })
-    })
-    .then((res) => returnResponse(res))
+        body: JSON.stringify({ password, email }),
+        credentials: "include",
+      }).then((res) => {
+        return returnResponse(res);
+      });
 }
 
 
 export const authorize = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })
-    })
-    .then((res) => returnResponse(res) )
-    .then((res) => {
-        if (res.token) {
-            localStorage.setItem('token', res.token)
-            return res
-        }
-    })
+        body: JSON.stringify({ password, email }),
+        credentials: "include",
+      }).then((res) => {
+        return returnResponse(res);
+      });
 };
 
 export const checkToken = (token) => {
     return fetch(`${BASE_URL}/users/me`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-        }
-    })
-    .then((res) => returnResponse(res) )
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      }).then((res) => {
+        return returnResponse(res);
+      });
 } 

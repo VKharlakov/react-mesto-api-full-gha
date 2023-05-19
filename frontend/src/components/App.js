@@ -35,14 +35,14 @@ function App() {
   const navigate = useNavigate()                                //Хук навигации
 
   React.useEffect(() => {
-    loggedIn &&
+    // loggedIn &&
       api.getUserInfo()
         .then((userData) => {
           setCurrentUser(userData)
         })
         .catch((err) => console.log(err))
 
-    loggedIn &&
+    // loggedIn &&
       api.getInitialCardSet()
         .then((cardList) => {
           console.log('getting cards api')
@@ -68,8 +68,8 @@ function App() {
 
   //Объявление функции проверки наличия токена в localStorage
   function tokenCheck() {
-    if (localStorage.getItem('jwt')) {
-      const token = localStorage.getItem('jwt')
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token')
 
       if (token) {
         auth.checkToken(token)

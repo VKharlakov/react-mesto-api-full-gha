@@ -8,6 +8,6 @@
 
 IP 51.250.98.186
 
-Frontend https://mesto.students.vkharlakov.nomoredomains.monster/
+Frontend https://mesto.students.vkharlakov.nomoredomains.monster
 
-Backend https://mesto.students.vkharlakov.nomoredomains.monster/api
+Backend https://api.mesto.vkharlakod.nomoredomains.monster
