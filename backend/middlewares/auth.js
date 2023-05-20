@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     return;
   }
 
-  const token = req.cookies.jwt;
+  const token = req.headers.authorization.replace('Bearer ', '');
   let payload;
 
   try {
