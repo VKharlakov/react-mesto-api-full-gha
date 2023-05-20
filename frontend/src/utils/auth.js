@@ -37,6 +37,7 @@ export const authorize = (email, password) => {
 };
 
 export const checkToken = (token) => {
+    console.log('forntend: auth.js: check token started:', token)
     return fetch(`${BASE_URL}/users/me`, {
         method: "GET",
         headers: {

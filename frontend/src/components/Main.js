@@ -5,8 +5,7 @@ import Card from "./Card";
 function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete }) {
     const currentUser = React.useContext(CurrentUserContext)
     React.useEffect(() => {
-        console.log('rendered')
-        console.log(CurrentUserContext)
+        console.log(cards, cards.length)
     })
 
     return (

@@ -12,6 +12,10 @@ class Api {
         }
     }
 
+    getToken(token) {
+        this._headers.authorization = `Bearer ${token}`;
+      }
+
     //Получение данных о пользователе
     getUserInfo() {
         return fetch(`${this._url}/users/me`, {

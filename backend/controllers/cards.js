@@ -8,7 +8,7 @@ const Forbidden = require('../errors/Forbidden');
 // Обработчик запроса списка карточек
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .populate(['owner', 'likes'])
+    .populate(['owner'])
     .then((cards) => { res.status(SUCCESS_CODES.success).send({ data: cards }); })
     .catch(next);
 };

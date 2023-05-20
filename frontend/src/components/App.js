@@ -34,26 +34,26 @@ function App() {
 
   const navigate = useNavigate()                                //Хук навигации
 
+  const jwt = localStorage.getItem('jwt')
+
   React.useEffect(() => {
-    // loggedIn &&
+    loggedIn &&
       api.getUserInfo()
         .then((userData) => {
-          setCurrentUser(userData)
+          setCurrentUser(userData.data)
         })
         .catch((err) => console.log(err))
 
-    // loggedIn &&
+    loggedIn &&
       api.getInitialCardSet()
         .then((cardList) => {
-          console.log('getting cards api')
-          setCards(cardList)
-          cards.map((card) => ({
+          setCards(cardList.data.reverse().map((card) => ({
             name: card.name,
             link: card.link,
             likes: card.likes,
             _id: card._id,
             owner: card.owner
-          }))
+          })))
         })
         .catch((err) => console.log(err))
   }, [loggedIn])
@@ -62,19 +62,18 @@ function App() {
     //Проверка наличия токена в localStorage
     tokenCheck()
 
-    //Метод получения массива фотографий с api
 
   }, [])
 
   //Объявление функции проверки наличия токена в localStorage
   function tokenCheck() {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token')
+    if (localStorage.getItem('jwt')) {
 
-      if (token) {
-        auth.checkToken(token)
+      if (jwt) {
+        auth.checkToken(jwt)
           .then((res) => {
             if (res) {
+              api.getToken(jwt)
               setUserData({ 'email': res.data.email })
               setLoggedIn(true)
               navigate('/', { replace: true })
@@ -89,7 +88,7 @@ function App() {
   function handleUpdateUser(newUserData) {
     api.patchUserInfo(newUserData)
       .then((data) => {
-        setCurrentUser(data)
+        setCurrentUser(data.data)
         closeAllPopups()
       })
       .catch((err) => console.log(err))
@@ -99,7 +98,7 @@ function App() {
   function handleUpdateAvatar(newUserAvatar) {
     api.editUserAvatar(newUserAvatar)
       .then((data) => {
-        setCurrentUser(data)
+        setCurrentUser(data.data)
         closeAllPopups()
       })
       .catch((err) => console.log(err))
@@ -109,7 +108,7 @@ function App() {
   function handleAddPlace(newPlace) {
     api.postNewCard(newPlace)
       .then((data) => {
-        setCards([data, ...cards])
+        setCards([data.data, ...cards])
         closeAllPopups()
       })
       .catch((err) => console.log(err))
@@ -127,12 +126,11 @@ function App() {
   //Объявление функции добавления/удаления лайка
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-
+    const isLiked = card.likes.some(i => i === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
       })
       .catch((err) => console.log(err))
   }
@@ -171,6 +169,7 @@ function App() {
     auth.authorize(email, password)
       .then((res) => {
         if (res.token) {
+          localStorage.setItem("jwt", res.token)
           setUserData({ 'email': email })
           setLoggedIn(true)
           navigate('/', { replace: true })
